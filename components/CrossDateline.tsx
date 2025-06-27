@@ -15,8 +15,6 @@ import Point from "ol/geom/Point";
 import { Style, Stroke, Fill, Circle as CircleStyle } from "ol/style";
 import { Translate } from "ol/interaction";
 import { fromLonLat, toLonLat } from "ol/proj";
-import { TranslateEvent } from "ol/interaction/Translate";
-import { Coordinate } from "ol/coordinate";
 
 const CrossDatelineMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -323,7 +321,7 @@ const CrossDatelineMap: React.FC = () => {
       isDragging = true;
     });
 
-    translate.on("translating", (event: TranslateEvent) => {
+    translate.on("translating", () => {
       if (!isDragging) return;
 
       const features = vectorSource.getFeatures();
@@ -345,7 +343,7 @@ const CrossDatelineMap: React.FC = () => {
       }
     });
 
-    translate.on("translateend", (event: TranslateEvent) => {
+    translate.on("translateend", () => {
       isDragging = false;
 
       const features = vectorSource.getFeatures();
