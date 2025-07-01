@@ -1,4 +1,4 @@
-import { LineString, MultiLineString } from "ol/geom";
+import { Geometry, LineString, MultiLineString } from "ol/geom";
 import { fromLonLat, toLonLat } from "ol/proj";
 
 // Function to check if a line segment crosses the dateline
@@ -106,10 +106,13 @@ export const createGeometry = (coords: [number, number][]) => {
 // Function to extract coordinates from any geometry type
 export const extractCoordinates = (geometry: LineString | MultiLineString) => {
   if (geometry instanceof MultiLineString) {
-    const allCoords: any = [];
+    const allCoords: [number, number][] = [];
     const lineStrings = geometry.getLineStrings();
     lineStrings.forEach((line, index) => {
-      const coords = line.getCoordinates().map((coord) => toLonLat(coord));
+      const coords = line.getCoordinates().map((coord) => toLonLat(coord)) as [
+        number,
+        number
+      ][];
       if (index === 0) {
         allCoords.push(...coords);
       } else {
