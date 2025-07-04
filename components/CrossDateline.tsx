@@ -114,6 +114,8 @@ const CrossDatelineMap: React.FC = () => {
       segments.push(currentSegment);
     }
 
+    console.log("Split segments:", segments);
+
     return segments;
   };
 
